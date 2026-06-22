@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOOP v7.2 - Dashboard de Lanzamiento y Control</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --verde-bosque: #0B3C35;
+            --blanco-tiza: #F7F5F0;
+            --gris-grafito: #222222;
+            --oro-viejo: #D4AF37;
+        }
+        body {
+            background-color: var(--blanco-tiza);
+            color: var(--gris-grafito);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <header class="bg-[#0B3C35] text-[#F7F5F0] border-b border-[#D4AF37]/30 px-6 py-4 flex flex-col sm:flex-row justify-between items-center shadow-lg gap-4">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full border-2 border-[#D4AF37] flex items-center justify-center font-bold text-lg tracking-wider text-[#D4AF37]">
+                K∞
+            </div>
+            <div>
+                <h1 class="text-xl font-semibold tracking-wide">KOOP Technology</h1>
+                <p class="text-xs text-gray-300">Tu comunidad financiera digital • <span class="text-[#D4AF37] font-bold">v7.2</span></p>
+            </div>
+        </div>
+        <div class="flex items-center gap-4 text-sm">
+            <div class="bg-black/20 border border-white/10 px-3 py-1.5 rounded-lg text-xs flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                Sandbox Piloto Regulado Activo
+            </div>
+            <div class="text-right hidden md:block">
+                <p class="font-medium text-[#F7F5F0]">Alexander E. García</p>
+                <p class="text-xs text-[#D4AF37]">Director Ejecutivo</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <div class="space-y-6 lg:col-span-1">
+            
+            <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-[#0B3C35]/5 rounded-bl-full pointer-events-none"></div>
+                <h2 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-wallet text-[#0B3C35]"></i> Estado de Billetera (Socio Piloto)
+                </h2>
+                
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-xs text-gray-500 font-medium">Balance Total Líquido (USDC)</p>
+                        <p class="text-3xl font-bold text-[#0B3C35] tracking-tight">$3,450.00 <span class="text-xs font-semibold text-gray-400">USDC</span></p>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-2 pt-2 border-t border-gray-100">
+                        <div>
+                            <p class="text-[10px] text-gray-400 uppercase font-bold">Ahorro Inmovilizado</p>
+                            <p class="text-sm font-semibold text-amber-700 flex items-center gap-1">
+                                <i class="fa-solid fa-lock text-xs"></i> $5,000.00
+                            </p>
+                            <span class="text-[9px] text-gray-400 block font-medium">Tramo Junior</span>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-gray-400 uppercase font-bold">Reputación Crédito</p>
+                            <p class="text-sm font-bold text-[#0B3C35] flex items-center gap-1">
+                                <i class="fa-solid fa-star text-[#D4AF37] text-xs"></i> 780 <span class="text-[10px] text-gray-400 font-normal">Score</span>
+                            </p>
+                            <span class="text-[9px] text-green-600 block font-semibold">Tier 2 (Apalancamiento 1.5:1)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 mt-6">
+                    <button onclick="openModal('depositModal')" class="bg-[#0B3C35] hover:bg-[#072924] text-white text-xs font-bold py-3 px-4 rounded-xl shadow-md transition duration-200 flex items-center justify-center gap-2 border border-transparent">
+                        <i class="fa-solid fa-arrow-down-to-line"></i> Abonar Ahorro
+                    </button>
+                    <button onclick="openModal('creditModal')" class="bg-white hover:bg-gray-50 text-[#0B3C35] border border-[#0B3C35] text-xs font-bold py-3 px-4 rounded-xl shadow-sm transition duration-200 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-hand-holding-dollar"></i> Pedir Crédito
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-microchip text-amber-600"></i> Mitigación de Riesgo Real (IoT / MDM)
+                </h2>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-xl border border-gray-100">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-motorcycle text-gray-500 text-lg"></i>
+                            <div>
+                                <p class="text-xs font-bold">Garantía Prendaria Activa</p>
+                                <p class="text-[10px] text-gray-400">ID Dispositivo: GPS-K92_VES</p>
+                            </div>
+                        </div>
+                        <span class="bg-green-100 text-green-800 text-[10px] font-bold px-2 py-1 rounded-md flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Conectado
+                        </span>
+                    </div>
+                    <div class="bg-[#0B3C35]/5 rounded-xl p-3 border border-[#0B3C35]/10 text-center">
+                        <p class="text-xs font-bold text-[#0B3C35] flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-shield-halved text-[#D4AF37]"></i> Estatus: Colateral Protegido Seguro
+                        </p>
+                        <p class="text-[10px] text-gray-500 mt-1">Monitoreo inalterable en servidor sin rastreo invasivo al usuario.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 text-white rounded-2xl p-5 shadow-sm border border-[#D4AF37]/20 relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 text-white/5 text-7xl font-bold select-none">7.2</div>
+                <h2 class="text-xs font-bold uppercase tracking-wider text-[#D4AF37] mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Umbrales de Seguridad v7.2 (Límites Duros)
+                </h2>
+                <ul class="space-y-2.5 text-xs text-gray-300">
+                    <li class="flex justify-between border-b border-white/10 pb-1.5">
+                        <span class="text-gray-400">Tope Máximo de Ahorros:</span>
+                        <span class="font-mono font-bold text-white">$50,000 USDC</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/10 pb-1.5">
+                        <span class="text-gray-400">Límite Mensual Crédito Piloto:</span>
+                        <span class="font-mono font-bold text-white">$500 USDC</span>
+                    </li>
+                    <li class="flex justify-between">
+                        <span class="text-gray-400">Penalización Retiro Anticipado:</span>
+                        <span class="font-mono font-bold text-red-400">12% Inmutable</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="space-y-6 lg:col-span-2">
+            
+            <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h2 class="text-sm font-bold text-[#0B3C35] mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-diagram-predecessor text-[#D4AF37]"></i> Smart Contract Splitter (Intereses)
+                    </h2>
+                    <p class="text-xs text-gray-400 mb-4">Distribución algorítmica y exacta automatizada on-chain de los intereses recaudados.</p>
+                    
+                    <div class="space-y-3 mt-2">
+                        <div class="p-2.5 rounded-xl border border-l-4 border-l-[#0B3C35] bg-gray-50 flex justify-between items-center">
+                            <div>
+                                <p class="text-xs font-bold text-gray-700">50% Billetera Operativa KOOP</p>
+                                <p class="text-[10px] text-gray-400">Sostenibilidad y subsidio de red (Gas Paymaster)</p>
+                            </div>
+                            <span class="font-mono font-bold text-sm text-[#0B3C35]">$1,250.00</span>
+                        </div>
+                        <div class="p-2.5 rounded-xl border border-l-4 border-l-[#D4AF37] bg-gray-50 flex justify-between items-center">
+                            <div>
+                                <p class="text-xs font-bold text-gray-700">30% Pozo de Dividendos Socios</p>
+                                <p class="text-[10px] text-gray-400">Rendimiento alternativo directo al Tramo Junior</p>
+                            </div>
+                            <span class="font-mono font-bold text-sm text-[#D4AF37]">$750.00</span>
+                        </div>
+                        <div class="p-2.5 rounded-xl border border-l-4 border-l-red-700 bg-gray-50 flex justify-between items-center">
+                            <div>
+                                <p class="text-xs font-bold text-gray-700">20% Fondo de Reserva Técnica</p>
+                                <p class="text-[10px] text-gray-400">Fondo de Cobertura de Riesgo inmovilizado</p>
+                            </div>
+                            <span class="font-mono font-bold text-sm text-red-700">$500.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-center p-2 bg-gray-50 rounded-xl border border-gray-100">
+                    <div class="w-full max-w-[210px] h-[210px]">
+                        <canvas id="splitterChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-amber-50/50 border border-amber-200 rounded-2xl p-6 shadow-sm">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-amber-200/60 pb-3 mb-4 gap-2">
+                    <div>
+                        <h2 class="text-sm font-bold text-amber-900 flex items-center gap-2">
+                            <i class="fa-solid fa-building-columns text-amber-700"></i> Portal de Súper Auditoría Gubernamental
+                        </h2>
+                        <p class="text-xs text-amber-700">Transparencia Radical Web3 para entes de regulación cripto nacional (Solo Lectura).</p>
+                    </div>
+                    <span class="bg-amber-100 text-amber-900 font-mono text-[10px] font-bold px-2 py-1 rounded border border-amber-300">
+                        <i class="fa-solid fa-eye"></i> RegTech Connected
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="bg-white p-3 rounded-xl border border-amber-200/70 shadow-2xs">
+                        <p class="font-bold text-gray-700 mb-1.5"><i class="fa-solid fa-cubes text-gray-400"></i> Validación de Fondos en Blockchain</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-500">Inyección 20% Reserva (Fondo Riesgo):</span>
+                            <span class="font-mono font-bold text-green-700">$12,450.00 USDC</span>
+                        </div>
+                        <div class="w-full bg-gray-100 h-1.5 rounded-full mt-2 overflow-hidden">
+                            <div class="bg-green-600 h-full w-[65%]"></div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-amber-200/70 shadow-2xs">
+                        <p class="font-bold text-gray-700 mb-1.5"><i class="fa-solid fa-user-shield text-gray-400"></i> logs de Transacciones Privadas (AML)</p>
+                        <div class="font-mono text-[10px] text-gray-500 space-y-1">
+                            <p class="truncate"><span class="text-blue-600">TX_ID 0x82f..</span> • Depósito Seguro $250 USDC • <span class="text-green-600">VALIDADO</span></p>
+                            <p class="truncate"><span class="text-blue-600">TX_ID 0x11a..</span> • Microcrédito $150 USDC • <span class="text-green-600">VALIDADO</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+                <h2 class="text-sm font-bold text-[#0B3C35] mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-route text-[#D4AF37]"></i> Hoja de Ruta Tecnológica y Operativa v7.2
+                </h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 relative">
+                    <div class="border border-green-200 bg-green-50/40 rounded-xl p-3.5 relative">
+                        <div class="absolute top-2 right-2 text-green-700"><i class="fa-solid fa-circle-check"></i></div>
+                        <span class="text-[10px] uppercase font-bold text-green-700 tracking-wider">Fase 1</span>
+                        <p class="text-xs font-bold text-gray-800 mt-1">Cimientos Legales</p>
+                        <p class="text-[11px] text-gray-500 mt-1">Registro de Epignosis (La Guaira) y KOOP Technologies (Caracas).</p>
+                    </div>
+                    <div class="border border-blue-200 bg-blue-50/40 rounded-xl p-3.5 relative">
+                        <div class="absolute top-2 right-2 text-blue-600 animate-pulse"><i class="fa-solid fa-spinner"></i></div>
+                        <span class="text-[10px] uppercase font-bold text-blue-700 tracking-wider">Fase 2</span>
+                        <p class="text-xs font-bold text-gray-800 mt-1">Motor Tecnológico</p>
+                        <p class="text-[11px] text-gray-500 mt-1">Contratos Solidity de Capa 2, pasarelas P2B y abstracción.</p>
+                    </div>
+                    <div class="border border-gray-100 bg-gray-50 rounded-xl p-3.5 opacity-65">
+                        <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Fase 3</span>
+                        <p class="text-xs font-bold text-gray-800 mt-1">Sandbox Regulado</p>
+                        <p class="text-[11px] text-gray-500 mt-1">Validaciones piloto reales acotadas a 100 usuarios máximos.</p>
+                    </div>
+                    <div class="border border-gray-100 bg-gray-50 rounded-xl p-3.5 opacity-65">
+                        <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Fase 4</span>
+                        <p class="text-xs font-bold text-gray-800 mt-1">Levantamiento Capital</p>
+                        <p class="text-[11px] text-gray-500 mt-1">Fondo Multitramo (Senior Vault) para activos reales RWA.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 mt-auto py-4 px-6 text-center text-xs text-gray-500">
+        <p>© 2026 EPIGNOSIS CORPORATE HOLDING. Blueprint Estratégico y Propiedad Intelectual Confidencial de KOOP.</p>
+    </footer>
+
+    <div id="depositModal" class="fixed inset-0 bg-black/60 backdrop-blur-xs hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 border border-gray-200 animate-in fade-in zoom-in-95 duration-150">
+            <div class="flex justify-between items-center border-b border-gray-100 pb-3 mb-4">
+                <h3 class="font-bold text-[#0B3C35] flex items-center gap-2"><i class="fa-solid fa-arrow-down-to-line"></i> Simular Abono de Ahorro</h3>
+                <button onclick="closeModal('depositModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-4 text-xs">
+                <div>
+                    <label class="block font-bold text-gray-600 mb-1">Monto en Bolívares (Pago Móvil Off-chain)</label>
+                    <input type="number" placeholder="Ej. 5000 VES" class="w-full border border-gray-300 rounded-lg p-2 font-mono">
+                </div>
+                <div class="p-3 bg-blue-50 text-blue-950 rounded-xl border border-blue-200/60">
+                    <p class="font-semibold flex items-center gap-1"><i class="fa-solid fa-bolt"></i> Conversión Rampa Web3</p>
+                    <p class="mt-0.5 text-[11px] text-blue-900">Se convertirá automáticamente a USDC vía webhook inyectando el capital al Tramo Junior.</p>
+                </div>
+                <div class="text-[10px] text-red-600 font-semibold bg-red-50 p-2 rounded border border-red-200">
+                    ⚠️ Nota v7.2: Depósitos que superen un balance de $50,000 USDC rebotarán de forma robótica automática.
+                </div>
+                <button onclick="triggerAction('Abono procesado exitosamente en el Smart Contract y registrado en Supabase.')" class="w-full bg-[#0B3C35] text-white py-2.5 rounded-xl font-bold hover:bg-[#072924] transition">
+                    Ejecutar Transacción
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="creditModal" class="fixed inset-0 bg-black/60 backdrop-blur-xs hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 border border-gray-200 animate-in fade-in zoom-in-95 duration-150">
+            <div class="flex justify-between items-center border-b border-gray-100 pb-3 mb-4">
+                <h3 class="font-bold text-[#0B3C35] flex items-center gap-2"><i class="fa-solid fa-hand-holding-dollar"></i> Solicitar Microcrédito 1:1</h3>
+                <button onclick="closeModal('creditModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-4 text-xs">
+                <div>
+                    <label class="block font-bold text-gray-600 mb-1">Monto Solicitado (USDC)</label>
+                    <input type="number" max="500" placeholder="Máximo $500 USDC" class="w-full border border-gray-300 rounded-lg p-2 font-mono">
+                </div>
+                <div class="p-3 bg-amber-50 text-amber-950 rounded-xl border border-amber-200/60">
+                    <p class="font-semibold"><i class="fa-solid fa-circle-info"></i> Regla de Inmovilidad de la v7.2</p>
+                    <p class="mt-0.5 text-[11px] text-amber-900">Requiere un ratio de colateral 1:1 inmovilizado en la Bóveda por un período de maduración estricto.</p>
+                </div>
+                <button onclick="triggerAction('Solicitud de crédito verificada con el Koop Score y enviada al Smart Contract.')" class="w-full bg-[#0B3C35] text-white py-2.5 rounded-xl font-bold hover:bg-[#072924] transition">
+                    Verificar y Solicitar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Inicialización del Gráfico de Split de Intereses con Chart.js
+        const ctx = document.getElementById('splitterChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Operativo KOOP', 'Dividendos Socios', 'Fondo de Reserva'],
+                datasets: [{
+                    data: [50, 30, 20],
+                    backgroundColor: ['#0B3C35', '#D4AF37', '#b91c1c'],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                cutout: '70%'
+            }
+        });
+
+        // Funciones de Modales
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        function triggerAction(message) {
+            alert("🔒 Webhook Triggered:\n" + message);
+            document.querySelectorAll('.fixed').forEach(m => m.style.display = 'none');
+        }
+    </script>
+</body>
+</html>
