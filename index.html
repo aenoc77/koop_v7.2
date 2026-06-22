@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KOOP v7.2 - Dashboard de Lanzamiento y Control</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js para visualización de dividendos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome para íconos elegantes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -23,6 +26,7 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
+    <!-- TOP BAR / HEADER -->
     <header class="bg-[#0B3C35] text-[#F7F5F0] border-b border-[#D4AF37]/30 px-6 py-4 flex flex-col sm:flex-row justify-between items-center shadow-lg gap-4">
         <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-full border-2 border-[#D4AF37] flex items-center justify-center font-bold text-lg tracking-wider text-[#D4AF37]">
@@ -38,17 +42,27 @@
                 <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
                 Sandbox Piloto Regulado Activo
             </div>
-            <div class="text-right hidden md:block">
-                <p class="font-medium text-[#F7F5F0]">Alexander E. García</p>
-                <p class="text-xs text-[#D4AF37]">Director Ejecutivo</p>
+            <div class="flex items-center gap-4 text-right hidden md:flex border-l border-white/20 pl-4 ml-2">
+                <div>
+                    <p class="font-medium text-[#F7F5F0]">Xavier Moreno</p>
+                    <p class="text-[10px] text-[#D4AF37] uppercase tracking-wider">Presidente Holding</p>
+                </div>
+                <div class="border-l border-white/20 h-6"></div>
+                <div>
+                    <p class="font-medium text-[#F7F5F0]">Alexander Enoc García</p>
+                    <p class="text-[10px] text-[#D4AF37] uppercase tracking-wider">Director Ejecutivo</p>
+                </div>
             </div>
         </div>
     </header>
 
+    <!-- MAIN CONTAINER -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
         
+        <!-- LEFT COLUMN: ACCOUNT STATUS & QUICK ACTIONS -->
         <div class="space-y-6 lg:col-span-1">
             
+            <!-- WALLET STATUS -->
             <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-24 h-24 bg-[#0B3C35]/5 rounded-bl-full pointer-events-none"></div>
                 <h2 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4 flex items-center gap-2">
@@ -79,6 +93,7 @@
                     </div>
                 </div>
 
+                <!-- ACTIONS BUTTONS -->
                 <div class="grid grid-cols-2 gap-3 mt-6">
                     <button onclick="openModal('depositModal')" class="bg-[#0B3C35] hover:bg-[#072924] text-white text-xs font-bold py-3 px-4 rounded-xl shadow-md transition duration-200 flex items-center justify-center gap-2 border border-transparent">
                         <i class="fa-solid fa-arrow-down-to-line"></i> Abonar Ahorro
@@ -89,6 +104,7 @@
                 </div>
             </div>
 
+            <!-- HARDWARE THREAT MITIGATION STATUS (IoT/MDM) -->
             <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
                 <h2 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4 flex items-center gap-2">
                     <i class="fa-solid fa-microchip text-amber-600"></i> Mitigación de Riesgo Real (IoT / MDM)
@@ -115,6 +131,7 @@
                 </div>
             </div>
 
+            <!-- V7.2 STRICT SYSTEM THRESHOLDS -->
             <div class="bg-slate-900 text-white rounded-2xl p-5 shadow-sm border border-[#D4AF37]/20 relative overflow-hidden">
                 <div class="absolute -right-6 -bottom-6 text-white/5 text-7xl font-bold select-none">7.2</div>
                 <h2 class="text-xs font-bold uppercase tracking-wider text-[#D4AF37] mb-3 flex items-center gap-2">
@@ -138,8 +155,10 @@
 
         </div>
 
+        <!-- CENTER & RIGHT COLUMN: METRICS, SMART CONTRACTS AND REGULATORY AUDIT -->
         <div class="space-y-6 lg:col-span-2">
             
+            <!-- SMART CONTRACT SPLITTER VIEW (GRAPH & METRICS) -->
             <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <h2 class="text-sm font-bold text-[#0B3C35] mb-1 flex items-center gap-2">
@@ -172,6 +191,7 @@
                     </div>
                 </div>
 
+                <!-- CHART INSIDE -->
                 <div class="flex items-center justify-center p-2 bg-gray-50 rounded-xl border border-gray-100">
                     <div class="w-full max-w-[210px] h-[210px]">
                         <canvas id="splitterChart"></canvas>
@@ -179,16 +199,17 @@
                 </div>
             </div>
 
+            <!-- REGULATOR READ-ONLY AUDIT PORTAL (NEW IN V7.2) -->
             <div class="bg-amber-50/50 border border-amber-200 rounded-2xl p-6 shadow-sm">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-amber-200/60 pb-3 mb-4 gap-2">
                     <div>
                         <h2 class="text-sm font-bold text-amber-900 flex items-center gap-2">
-                            <i class="fa-solid fa-building-columns text-amber-700"></i> Portal de Súper Auditoría Gubernamental
+                            <i class="fa-solid fa-building-columns text-amber-700"></i> RegTech • Portal de Auditoría de Solo Lectura para Reguladores
                         </h2>
-                        <p class="text-xs text-amber-700">Transparencia Radical Web3 para entes de regulación cripto nacional (Solo Lectura).</p>
+                        <p class="text-xs text-amber-700">Transparencia Radical Web3 para entes de regulación cripto nacional.</p>
                     </div>
                     <span class="bg-amber-100 text-amber-900 font-mono text-[10px] font-bold px-2 py-1 rounded border border-amber-300">
-                        <i class="fa-solid fa-eye"></i> RegTech Connected
+                        <i class="fa-solid fa-eye"></i> Conectado
                     </span>
                 </div>
 
@@ -213,29 +234,34 @@
                 </div>
             </div>
 
+            <!-- ROADMAP OPERATIVO DE 4 FASES CONSOLIDADAS -->
             <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
                 <h2 class="text-sm font-bold text-[#0B3C35] mb-4 flex items-center gap-2">
                     <i class="fa-solid fa-route text-[#D4AF37]"></i> Hoja de Ruta Tecnológica y Operativa v7.2
                 </h2>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 relative">
+                    <!-- Fase 1 -->
                     <div class="border border-green-200 bg-green-50/40 rounded-xl p-3.5 relative">
                         <div class="absolute top-2 right-2 text-green-700"><i class="fa-solid fa-circle-check"></i></div>
                         <span class="text-[10px] uppercase font-bold text-green-700 tracking-wider">Fase 1</span>
                         <p class="text-xs font-bold text-gray-800 mt-1">Cimientos Legales</p>
                         <p class="text-[11px] text-gray-500 mt-1">Registro de Epignosis (La Guaira) y KOOP Technologies (Caracas).</p>
                     </div>
+                    <!-- Fase 2 -->
                     <div class="border border-blue-200 bg-blue-50/40 rounded-xl p-3.5 relative">
                         <div class="absolute top-2 right-2 text-blue-600 animate-pulse"><i class="fa-solid fa-spinner"></i></div>
                         <span class="text-[10px] uppercase font-bold text-blue-700 tracking-wider">Fase 2</span>
                         <p class="text-xs font-bold text-gray-800 mt-1">Motor Tecnológico</p>
                         <p class="text-[11px] text-gray-500 mt-1">Contratos Solidity de Capa 2, pasarelas P2B y abstracción.</p>
                     </div>
+                    <!-- Fase 3 -->
                     <div class="border border-gray-100 bg-gray-50 rounded-xl p-3.5 opacity-65">
                         <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Fase 3</span>
                         <p class="text-xs font-bold text-gray-800 mt-1">Sandbox Regulado</p>
                         <p class="text-[11px] text-gray-500 mt-1">Validaciones piloto reales acotadas a 100 usuarios máximos.</p>
                     </div>
+                    <!-- Fase 4 -->
                     <div class="border border-gray-100 bg-gray-50 rounded-xl p-3.5 opacity-65">
                         <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Fase 4</span>
                         <p class="text-xs font-bold text-gray-800 mt-1">Levantamiento Capital</p>
@@ -248,37 +274,37 @@
 
     </main>
 
-    <footer class="bg-white border-t border-gray-200 mt-auto py-4 px-6 text-center text-xs text-gray-500">
-        <p>© 2026 EPIGNOSIS CORPORATE HOLDING. Blueprint Estratégico y Propiedad Intelectual Confidencial de KOOP.</p>
+    <!-- FOOTER / NAV MENU -->
+    <footer class="bg-white border-t border-gray-200 mt-auto py-5 px-6 text-center text-xs text-gray-500 leading-relaxed">
+        <p class="font-semibold text-gray-700">Propiedad Intelectual Confidencial • Blueprint Estratégico KOOP</p>
+        <p>© 2026 EPIGNOSIS CORPORATE HOLDING.</p>
+        <p class="mt-2 text-[#0B3C35]"><strong>Xavier Moreno</strong>, Presidente del Holding Epignosis • <strong>Alexander Enoc García</strong>, Director Ejecutivo de KOOP</p>
     </footer>
 
-    <div id="depositModal" class="fixed inset-0 bg-black/60 backdrop-blur-xs hidden items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-2xl max-w-sm w-full p-6 border border-gray-200 animate-in fade-in zoom-in-95 duration-150">
+    <!-- INTERACTIVE MODALS -->
+    <div id="depositModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 border border-gray-200">
             <div class="flex justify-between items-center border-b border-gray-100 pb-3 mb-4">
                 <h3 class="font-bold text-[#0B3C35] flex items-center gap-2"><i class="fa-solid fa-arrow-down-to-line"></i> Simular Abono de Ahorro</h3>
                 <button onclick="closeModal('depositModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="space-y-4 text-xs">
                 <div>
-                    <label class="block font-bold text-gray-600 mb-1">Monto en Bolívares (Pago Móvil Off-chain)</label>
+                    <label class="block font-bold text-gray-600 mb-1">Monto en Bolívares</label>
                     <input type="number" placeholder="Ej. 5000 VES" class="w-full border border-gray-300 rounded-lg p-2 font-mono">
                 </div>
                 <div class="p-3 bg-blue-50 text-blue-950 rounded-xl border border-blue-200/60">
-                    <p class="font-semibold flex items-center gap-1"><i class="fa-solid fa-bolt"></i> Conversión Rampa Web3</p>
-                    <p class="mt-0.5 text-[11px] text-blue-900">Se convertirá automáticamente a USDC vía webhook inyectando el capital al Tramo Junior.</p>
+                    <p class="font-semibold">Conversión Automática Web3</p>
                 </div>
-                <div class="text-[10px] text-red-600 font-semibold bg-red-50 p-2 rounded border border-red-200">
-                    ⚠️ Nota v7.2: Depósitos que superen un balance de $50,000 USDC rebotarán de forma robótica automática.
-                </div>
-                <button onclick="triggerAction('Abono procesado exitosamente en el Smart Contract y registrado en Supabase.')" class="w-full bg-[#0B3C35] text-white py-2.5 rounded-xl font-bold hover:bg-[#072924] transition">
+                <button onclick="triggerAction('Abono procesado')" class="w-full bg-[#0B3C35] text-white py-2.5 rounded-xl font-bold hover:bg-[#072924] transition">
                     Ejecutar Transacción
                 </button>
             </div>
         </div>
     </div>
 
-    <div id="creditModal" class="fixed inset-0 bg-black/60 backdrop-blur-xs hidden items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-2xl max-w-sm w-full p-6 border border-gray-200 animate-in fade-in zoom-in-95 duration-150">
+    <div id="creditModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 border border-gray-200">
             <div class="flex justify-between items-center border-b border-gray-100 pb-3 mb-4">
                 <h3 class="font-bold text-[#0B3C35] flex items-center gap-2"><i class="fa-solid fa-hand-holding-dollar"></i> Solicitar Microcrédito 1:1</h3>
                 <button onclick="closeModal('creditModal')" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark"></i></button>
@@ -288,11 +314,7 @@
                     <label class="block font-bold text-gray-600 mb-1">Monto Solicitado (USDC)</label>
                     <input type="number" max="500" placeholder="Máximo $500 USDC" class="w-full border border-gray-300 rounded-lg p-2 font-mono">
                 </div>
-                <div class="p-3 bg-amber-50 text-amber-950 rounded-xl border border-amber-200/60">
-                    <p class="font-semibold"><i class="fa-solid fa-circle-info"></i> Regla de Inmovilidad de la v7.2</p>
-                    <p class="mt-0.5 text-[11px] text-amber-900">Requiere un ratio de colateral 1:1 inmovilizado en la Bóveda por un período de maduración estricto.</p>
-                </div>
-                <button onclick="triggerAction('Solicitud de crédito verificada con el Koop Score y enviada al Smart Contract.')" class="w-full bg-[#0B3C35] text-white py-2.5 rounded-xl font-bold hover:bg-[#072924] transition">
+                <button onclick="triggerAction('Crédito Solicitado')" class="w-full bg-[#0B3C35] text-white py-2.5 rounded-xl font-bold hover:bg-[#072924] transition">
                     Verificar y Solicitar
                 </button>
             </div>
@@ -300,12 +322,11 @@
     </div>
 
     <script>
-        // Inicialización del Gráfico de Split de Intereses con Chart.js
         const ctx = document.getElementById('splitterChart').getContext('2d');
         new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: ['Operativo KOOP', 'Dividendos Socios', 'Fondo de Reserva'],
+                labels: ['Operativo', 'Dividendos', 'Reserva'],
                 datasets: [{
                     data: [50, 30, 20],
                     backgroundColor: ['#0B3C35', '#D4AF37', '#b91c1c'],
@@ -316,26 +337,14 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
+                plugins: { legend: { display: false } },
                 cutout: '70%'
             }
         });
 
-        // Funciones de Modales
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'flex';
-        }
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-        function triggerAction(message) {
-            alert("🔒 Webhook Triggered:\n" + message);
-            document.querySelectorAll('.fixed').forEach(m => m.style.display = 'none');
-        }
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        function triggerAction(msg) { alert(msg); document.querySelectorAll('.fixed').forEach(m => m.style.display = 'none'); }
     </script>
 </body>
 </html>
